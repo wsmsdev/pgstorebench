@@ -175,7 +175,12 @@ func insertVectors(vectors []Vector, pool *pgxpool.Pool, ctx context.Context, lo
 	}
 	
 	elapsed := time.Since(start)
-	logger.Printf("Time taken to insert %d vectors: %s", len(vectors), elapsed)
+	totalVectors := len(vectors)
+	logger.Printf("Time taken to insert %d vectors: %s", totalVectors, elapsed)
+	
+	vectorsPerSecond := float64(totalVectors) / elapsed.Seconds()
+	logger.Printf("Insertion rate: %.2f vectors/second", vectorsPerSecond)
+	
 	return nil
 }
 

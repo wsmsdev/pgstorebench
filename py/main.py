@@ -99,7 +99,12 @@ async def insert_in_batches(
     await asyncio.gather(*[process_batch(batch) for batch in batches])
 
     end = time.time()
-    logger.info(f"Time taken to insert {len(vectors)} vectors: {end - start} seconds")
+    elapsed = end - start
+    total_vectors = len(vectors)
+    logger.info(f"Time taken to insert {total_vectors} vectors: {elapsed:.2f} seconds")
+
+    vectors_per_second = total_vectors / elapsed
+    logger.info(f"Insertion rate: {vectors_per_second:.2f} vectors/second")
 
 
 async def main(max_workers: int, pool: asyncpg.Connection, vector_amount: int):
