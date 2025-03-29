@@ -89,7 +89,7 @@ func main() {
 	}
 
 	// Generate vectors and insert them
-	vectors := generateVectors(1000000, 1024)
+	vectors := generateVectors(100000, 1024)
 	if err := insertVectors(vectors, pool, ctx, logger); err != nil {
 		log.Fatalf("Error inserting vectors: %v", err)
 	}
